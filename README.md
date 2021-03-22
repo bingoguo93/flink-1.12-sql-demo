@@ -13,6 +13,7 @@
  flink sql api编写程序，实现ETL功能，包含读写Mysql,kafka 
  
  source Mysql MysqlCDC
+ 
  sink Mysql
 
 # 使用说明
