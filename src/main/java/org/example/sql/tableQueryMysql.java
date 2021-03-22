@@ -75,6 +75,8 @@ public class tableQueryMysql {
                            "   ,'username'='root'                             \n " +
                            "   ,'password'='Aa123456!'                        \n " +
                            "   ,'driver'='com.mysql.cj.jdbc.Driver'              " +
+                           "   ,'lookup.cache.ttl'='10s'                         " +
+                           "   ,'lookup.cache.max-rows'='100'                    " +
                            ")                                                    "
                            ;
 
@@ -84,6 +86,7 @@ public class tableQueryMysql {
         String sqlcdcCreate = "create table mysqlcdc_test(                          \n " +
                               "   id int                                         \n " +
                               "   ,name String                                   \n " +
+                              "   ,proctime as  PROCTIME()                      \n " +
                               "   ,primary key (id)     not ENFORCED                " +
                               ")                                                 \n " +
                               "WITH (                                            \n " +
@@ -118,7 +121,16 @@ public class tableQueryMysql {
 
         DataStream<Tuple2<Boolean, Row>> resultCDC = tenv.toRetractStream(testcdc, Row.class);
 
-        resultCDC.print("mysqlCDC表数据");
+        //resultCDC.print("mysqlCDC表数据");
+
+        //关联
+        String sqlJoin = "select * from mysqlcdc_test as a \n" +
+                "left join mysql_test for SYSTEM_TIME as OF a.proctime as b \n" +
+                "on a.id = b.id \n";
+        Table test = tenv.sqlQuery(sqlJoin);
+
+        DataStream<Tuple2<Boolean, Row>> resultTest = tenv.toRetractStream(test, Row.class);
+        resultTest.print("JOIN");
 
         //5.execute
         env.execute();
