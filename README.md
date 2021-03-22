@@ -6,6 +6,14 @@
  代码里自带数据生成，配有合适的数据演示。
  
  pom.xml包含了flink绝大部分的依赖，maven下载会比较久。
+ 
+# 环境
+Windows 10 ltsc
+
+Mysql8.0.23 
+
+Idea社区版2020.3
+
 # streamset
  使用streamset api编写flink程序
 
