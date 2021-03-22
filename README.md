@@ -12,7 +12,7 @@ flink sql api编写程序，实现ETL功能，包含读写Mysql,kafka
 
 # 使用说明
 克隆仓库
-git clone https://gitclone.com/github.com/bingoguo93/flinksql_demo.git
+git clone https://github.com/bingoguo93/flinksql_demo.git
 
 使用idea打开项目
 
