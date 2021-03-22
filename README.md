@@ -5,7 +5,7 @@
  
  代码里自带数据生成，配有合适的数据演示。
  
- maven包含了flink绝大部分的依赖，下载会比较久。
+ pom.xml包含了flink绝大部分的依赖，maven下载会比较久。
 # streamset
  使用streamset api编写flink程序
 
