@@ -1,11 +1,13 @@
 [![License](http://img.shields.io/:license-apache%202.0-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 # flinksql_demo
- 个人练习flink 的demo，后续会继续更新。
+ 个人练习flink 的demo。
  
  代码里自带数据生成，配有合适的数据演示。
  
  pom.xml包含了flink绝大部分的依赖，maven下载会比较久。
+ 
+ 目前项目内容包含了flink streamset flinkSQL flinkCDC Mysql
  
 # 环境
 Windows 10 ltsc
