@@ -139,21 +139,12 @@ public class tableQueryMysqlTempralJoin {
 
         tenv.executeSql(sqlInset);
 
-        //read 普通表
-        String sql = "select * from mysql_test";
-        Table orderSmry = tenv.sqlQuery(sql);
-
-        DataStream<Tuple2<Boolean, Row>> resultDS = tenv.toRetractStream(orderSmry, Row.class);
-
-        resultDS.print("mysql普通表数据");
 
 
         //read CDC表
-        String sqlcdc = "select * from mysqlcdc_test";
-        Table testcdc = tenv.sqlQuery(sqlcdc);
-
-        DataStream<Tuple2<Boolean, Row>> resultCDC = tenv.toRetractStream(testcdc, Row.class);
-
+        //String sqlcdc = "select * from mysqlcdc_test";
+        //Table testcdc = tenv.sqlQuery(sqlcdc);
+        //DataStream<Tuple2<Boolean, Row>> resultCDC = tenv.toRetractStream(testcdc, Row.class);
         //resultCDC.print("mysqlCDC表数据");
 
         //关联 基于事件时间的tempral join
