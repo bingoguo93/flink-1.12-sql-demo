@@ -28,8 +28,8 @@ import static org.apache.flink.table.api.Expressions.$;
  * Mysql主表 create table test(id int ,name varchar(50) ,primary key(id) );
  * Mysql维表 create table test1(id int ,name varchar(50) ,primary key(id) );
  *
- * Mysql DML 语句 ，可在MySQL客户端操作test1维表，看看维表变化
- * 同步关联结果变化，帮助理解基于事件时间的tempral join
+ * Mysql DML 语句 ，可在MySQL客户端操作test1维表，看看维表变化之后关联结果变化
+ * 帮助理解基于事件时间的tempral join
  *         truncate table test1;
  *         select * from test1;
  *         insert into test1 select * from test;
