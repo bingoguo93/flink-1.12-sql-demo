@@ -1,6 +1,6 @@
 [![License](http://img.shields.io/:license-apache%202.0-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-# flinksql_demo
+# flink1.12.1 sql demo
  个人练习flink 的demo。
  
  代码里自带数据生成，配有合适的数据演示。
