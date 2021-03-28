@@ -11,9 +11,13 @@
  
 # 环境
 Windows 10 ltsc
+
 Mysql8.0.23
+
 Idea社区版2020.3
+
 HaidiSQL
+
 环境搭建教程：https://www.cnblogs.com/abramgyb/p/14587901.html
 
 # streamset
