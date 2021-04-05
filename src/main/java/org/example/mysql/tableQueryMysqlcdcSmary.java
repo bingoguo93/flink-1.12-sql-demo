@@ -1,4 +1,4 @@
-package org.example.sql;
+package org.example.mysql;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

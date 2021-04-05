@@ -1,4 +1,4 @@
-package org.example.sql;
+package org.example.mysql;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,23 +23,10 @@ import static org.apache.flink.table.api.Expressions.$;
 
 /**
  * Author Abram
- * Desc 演示Flink Table&SQL 测试tempral Join 基于proctime
- *
- * Mysql主表 create table test(id int ,name varchar(50) ,primary key(id) );
- * Mysql维表 create table test1(id int ,name varchar(50) ,primary key(id) );
- *
- * Mysql DML 语句 ，可在MySQL客户端操作test1维表，看看维表变化之后关联结果变化
- * 帮助理解基于事件时间的tempral join
- *         truncate table test1;
- *         select * from test1;
- *         insert into test1 select * from test;
- *         update test1 set name='222';
- *
- * 优化参数
- * "   ,'lookup.cache.ttl'='20s'                         " +
- * "   ,'lookup.cache.max-rows'='100'                    " +
+ * Desc 演示Flink Table&SQL 案例- 读写Mysql MysqlCDC
+ * Mysql create table test(id int ,name varchar(50) ,primary key(id) )
  */
-public class tableQueryMysqlTempralJoin {
+public class tableQueryMysql {
     public static void main(String[] args) throws Exception {
         //1.env
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -75,7 +62,7 @@ public class tableQueryMysqlTempralJoin {
         tenv.createTemporaryView("tb_order",WaterMarkDS,$("id"),$("name"),$("createTime").rowtime());
 
 
-        //3.create table 普通表 test
+        //3.create table 普通表
         String sqlCreate = "create table mysql_test(                          \n " +
                            "   id int                                         \n " +
                            "   ,name String                                   \n " +
@@ -88,34 +75,14 @@ public class tableQueryMysqlTempralJoin {
                            "   ,'username'='root'                             \n " +
                            "   ,'password'='Aa123456!'                        \n " +
                            "   ,'driver'='com.mysql.cj.jdbc.Driver'              " +
-                           "   ,'lookup.cache.ttl'='20s'                         " +
+                           "   ,'lookup.cache.ttl'='10s'                         " +
                            "   ,'lookup.cache.max-rows'='100'                    " +
                            ")                                                    "
                            ;
 
         tenv.executeSql(sqlCreate);
 
-        //test1
-        String sqlCreate1 = "create table mysql_test1(                          \n " +
-                "   id int                                         \n " +
-                "   ,name String                                   \n " +
-                "   ,primary key (id)     not ENFORCED                " +
-                ")                                                 \n " +
-                "WITH (                                            \n " +
-                "   'connector' = 'jdbc'                           \n " +
-                "   ,'url' = 'jdbc:mysql://localhost:3306/imh_core'\n " +
-                "   ,'table-name' = 'test1'                         \n " +
-                "   ,'username'='root'                             \n " +
-                "   ,'password'='Aa123456!'                        \n " +
-                "   ,'driver'='com.mysql.cj.jdbc.Driver'              " +
-                "   ,'lookup.cache.ttl'='10s'                         " +
-                "   ,'lookup.cache.max-rows'='100'                    " +
-                ")                                                    "
-                ;
-
-        tenv.executeSql(sqlCreate1);
-
-        //3.create table cdc表 test
+        //3.create table cdc表
         String sqlcdcCreate = "create table mysqlcdc_test(                          \n " +
                               "   id int                                         \n " +
                               "   ,name String                                   \n " +
@@ -134,22 +101,31 @@ public class tableQueryMysqlTempralJoin {
                               ;
         tenv.executeSql(sqlcdcCreate);
 
-        //sink test
+        //sink
         String sqlInset = "insert into mysql_test select id ,name from tb_order" ;
 
         tenv.executeSql(sqlInset);
 
+        //read 普通表
+        String sql = "select * from mysql_test";
+        Table orderSmry = tenv.sqlQuery(sql);
+
+        DataStream<Tuple2<Boolean, Row>> resultDS = tenv.toRetractStream(orderSmry, Row.class);
+
+        resultDS.print("mysql普通表数据");
 
 
         //read CDC表
-        //String sqlcdc = "select * from mysqlcdc_test";
-        //Table testcdc = tenv.sqlQuery(sqlcdc);
-        //DataStream<Tuple2<Boolean, Row>> resultCDC = tenv.toRetractStream(testcdc, Row.class);
+        String sqlcdc = "select * from mysqlcdc_test";
+        Table testcdc = tenv.sqlQuery(sqlcdc);
+
+        DataStream<Tuple2<Boolean, Row>> resultCDC = tenv.toRetractStream(testcdc, Row.class);
+
         //resultCDC.print("mysqlCDC表数据");
 
-        //关联 基于事件时间的tempral join
+        //关联
         String sqlJoin = "select * from mysqlcdc_test as a \n" +
-                "left join mysql_test1 for SYSTEM_TIME as OF a.proctime as b \n" +
+                "left join mysql_test for SYSTEM_TIME as OF a.proctime as b \n" +
                 "on a.id = b.id \n";
         Table test = tenv.sqlQuery(sqlJoin);
 

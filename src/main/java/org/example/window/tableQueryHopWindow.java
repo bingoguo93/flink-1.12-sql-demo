@@ -1,4 +1,4 @@
-package org.example.sql;
+package org.example.window;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,9 +25,9 @@ import static org.apache.flink.table.api.Expressions.$;
 /**
  * Author Abram
  * Desc 演示Flink Table&SQL 案例- 使用事件时间+Watermaker+window完成订单统计
- * 滚动窗口
+ * 滑动窗口
  */
-public class tableQueryTumbleWindow {
+public class tableQueryHopWindow {
     public static void main(String[] args) throws Exception {
         //1.env
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -76,10 +76,10 @@ public class tableQueryTumbleWindow {
                 ", max(money) as maxMoney\n" +
                 ",min(money) as minMoney\n " +
                 ",min(createTime) \n" +
-                ",tumble_start(createTime, INTERVAL '5' SECOND) \n" +
-                ",tumble_end(createTime, INTERVAL '5' SECOND) \n" +
+                ",hop_start(createTime, INTERVAL '5' SECOND) \n" +
+                ",hop_end(createTime, INTERVAL '5' SECOND) \n" +
                 "from tb_order\n " +
-                "group by userId,tumble(createTime, INTERVAL '5' SECOND) "
+                "group by userId,hop(createTime, INTERVAL '5' SECOND,INTERVAL '60' SECOND) "
                 ;
 
         Table orderSmry = tenv.sqlQuery(sql);
