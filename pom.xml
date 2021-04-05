@@ -53,19 +53,26 @@
             <artifactId>flink-clients_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
+
         <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-planner-blink_2.11</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-common</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+       <!-- Scala开发
+       <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-scala_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-java</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-
-       <!-- Scala开发
        <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-scala_2.11</artifactId>
@@ -96,13 +103,7 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-planner-blink_2.11</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-common</artifactId>
+            <artifactId>flink-java</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
@@ -245,15 +246,8 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- hadoop Dependency local jar-->
-<!--        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-shaded-hadoop-2-uber</artifactId>
-            <version>3.0.0-cdh6.3.0-10.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/flink-shaded-hadoop-2-uber-3.0.0-cdh6.3.0-10.0.jar</systemPath>
-        </dependency>
--->
+        <!-- hadoop Dependency -->
+
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-shaded-hadoop-2-uber</artifactId>
