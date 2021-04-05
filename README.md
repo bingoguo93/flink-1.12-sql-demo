@@ -31,13 +31,6 @@ HaidiSQL
  sink Mysql
 
 # 使用说明
- 克隆仓库： git clone https://github.com/bingoguo93/flinksql_demo.git
-
- 使用idea打开项目
-
- maven下载相关依赖
-
-![image](https://user-images.githubusercontent.com/37023599/112001563-0c9f0e00-8b5a-11eb-8aff-44c981d807d3.png)
-
+ 环境搭建教程：https://www.cnblogs.com/abramgyb/p/14587901.html
 
  依赖下载完成后运行demo测试
