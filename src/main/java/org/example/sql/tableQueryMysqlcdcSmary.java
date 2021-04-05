@@ -43,8 +43,8 @@ public class tableQueryMysqlcdcSmary {
     public static void main(String[] args) throws Exception {
         //1.env
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        EnvironmentSettings Settings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
-        StreamTableEnvironment tenv = StreamTableEnvironment.create(env, Settings);
+        EnvironmentSettings settingS = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
+        StreamTableEnvironment tenv = StreamTableEnvironment.create(env, settingS);
 
         //2.source
         DataStreamSource<Order> orderDS  = env.addSource(new RichSourceFunction<Order>() {

@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.alibaba.ververica</groupId>
             <artifactId>flink-connector-mysql-cdc</artifactId>
-            <version>1.2.0</version>
+            <version>1.3.0</version>
         </dependency>
 
         <!-- flink Dependency -->
@@ -65,7 +65,8 @@
             <version>${flink.version}</version>
         </dependency>
 
-        <dependency>
+       <!-- Scala开发
+       <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-scala_2.11</artifactId>
             <version>${flink.version}</version>
@@ -73,13 +74,17 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java_2.11</artifactId>
+            <artifactId>flink-table-api-scala-bridge_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
+        -->
 
+
+
+        <!--Java 开发-->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-api-scala-bridge_2.11</artifactId>
+            <artifactId>flink-streaming-java_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
@@ -132,7 +137,7 @@
 
 
         <!-- elasticsearch Dependency -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-elasticsearch7_2.11</artifactId>
             <version>1.12.1</version>
@@ -154,7 +159,7 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-sql-connector-elasticsearch6_2.11</artifactId>
             <version>1.12.1</version>
-        </dependency>
+        </dependency>-->
 
         <!-- kafka Dependency -->
         <dependency>
@@ -194,13 +199,13 @@
             <version>1.12.1</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-sql-parquet_2.11</artifactId>
             <version>1.12.1</version>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-orc_2.11</artifactId>
             <version>1.12.1</version>
@@ -210,7 +215,7 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-sql-orc_2.11</artifactId>
             <version>1.12.1</version>
-        </dependency>
+        </dependency>-->
 
         <!-- tools Dependency -->
         <!-- 日志 -->
