@@ -1,4 +1,4 @@
-package org.example.datastream;
+package org.example.kerberos;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.security.UserGroupInformation;
