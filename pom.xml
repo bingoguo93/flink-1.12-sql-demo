@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>flinksql_demo</artifactId>
+    <artifactId>flink-1.12-sql-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <!-- 指定仓库位置，依次为aliyun、apache和cloudera仓库 -->
     <repositories>
