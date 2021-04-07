@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/flink-1.12-sql-demo.iml" filepath="$PROJECT_DIR$/flink-1.12-sql-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flinksql_demo.iml" filepath="$PROJECT_DIR$/flinksql_demo.iml" />
     </modules>
   </component>
 </project>
